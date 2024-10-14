@@ -1,0 +1,72 @@
+program ::= "VAR" decllist ";" cmpdstmt "."
+
+   decllist ::= declaration | declaration ";" decllist
+
+declaration ::= IDENTIFIER ":" type
+
+      type1 ::= "BOOLEAN" | "CHAR" | "INTEGER" | "REAL"
+
+  arraydecl ::= "ARRAY" "[" nr "]" "OF" type1
+
+      type  ::= type1|arraydecl
+
+   cmpdstmt ::= "BEGIN" stmtlist "END"
+
+   stmtlist ::= stmt | stmt ";" stmtlist
+
+       stmt ::= simplstmt | structstmt
+
+  simplstmt ::= assignstmt | iostmt
+
+ assignstmt ::= IDENTIFIER ":=" expression
+
+ expression ::= expression "+" term | term
+
+       term ::= term "*" factor | factor
+
+     factor ::= "(" expression ")" | IDENTIFIER
+
+     iostmt ::= "READ" | "WRITE" "(" IDENTIFIER ")"
+
+ structstmt ::= cmpdstmt | ifstmt | whilestmt
+
+     ifstmt ::= "IF" condition "THEN" stmt ["ELSE" stmt]
+
+  whilestmt ::= "WHILE" condition "DO" stmt
+
+  condition ::= expression RELATION expression
+
+   RELATION ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
+
+
+b)
+
+
+
+VAR
+    k : INTEGER;
+    n : INTEGER;
+    is_prime : INTEGER;
+    divisor : INTEGER;
+BEGIN
+    k := 10;  (* this can be any number btw *)
+    n := 2;   
+    WHILE k > 0 DO BEGIN
+        is_prime := 1;  (* assume n is prime initially *)
+        divisor := 2;
+        WHILE divisor * divisor <= n DO BEGIN
+            IF n MOD divisor = 0 THEN BEGIN
+                is_prime := 0;  (* n is not prime *)
+                BREAK;
+            END;
+            divisor := divisor + 1;
+        END;
+        IF is_prime = 1 THEN BEGIN
+            WRITE(n);  
+            k := k - 1; 
+        END;
+        n := n + 1;  (* check the next number *)
+    END;
+END.
+
+
