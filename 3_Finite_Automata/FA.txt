@@ -1,0 +1,20 @@
+<FA> ::= <States> <Alphabet> <Transitions> <FinalStates> <StartState>
+
+<States> ::= "States:" <StateList>
+<StateList> ::= <State> | <State> <StateList>
+<State> ::= <Identifier>
+
+<Alphabet> ::= "Alphabet:" <SymbolList>
+<SymbolList> ::= <Symbol> | <Symbol> <SymbolList>
+<Symbol> ::= <Identifier>
+
+<Transitions> ::= "Transitions:" <TransitionList>
+<TransitionList> ::= <Transition> | <Transition> <TransitionList>
+<Transition> ::= <State> <Symbol> <State>
+
+<FinalStates> ::= "FinalStates:" <StateList>
+
+<StartState> ::= "StartState:" <State>
+
+<Identifier> ::= <Letter> | <Letter> <Identifier>
+<Letter> ::= 'a' | 'b' | 'c' | 'd' | ... | 'z' | 'A' | 'B' | 'C' | ... | 'Z' 
